@@ -15,7 +15,7 @@
 
 <!-- DB를 접속하는 파일을 Include 해서 사용 -->
 <!-- include하는 파일은 .jsp 이어야 하고 들어오는 파일은 .html이어도 상관없다. -->
-<%@ include file="conn_oracle.jsp" %>
+<%@ include file="conn_mssql.jsp" %>
 
 <!-- 폼에서 넘겨주는 변수와 값을 받아서 저장 : request.getParameter("변수명"); -->
 <%	// 넘어오는 변수의 이름을 짧게 처리
@@ -97,7 +97,7 @@ try{
 
 %>
 
-<jsp:forward page = "dbgb_show03.jsp" />
+<jsp:forward page = "dbgb_show.jsp" />
 
 <!-- forward를 만나면 dbgb_show.jsp로 이동 -->
 
