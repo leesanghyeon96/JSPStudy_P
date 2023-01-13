@@ -5,7 +5,7 @@
 <%@ page import = "java.util.*,java.sql.*,java.text.*" %>
 <!-- DB include -->
 <%@ include file = "conn_oracle.jsp" %>	
-<!-- form에서 넘어오는 값의 한글처리 : MVC model 1에서 처리 -->
+<!-- form에서 넘어오는 값의 한글처리 -->
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <!-- form에서 넘어오는 데이터는 전부 String형식이다.
@@ -36,6 +36,7 @@
 	//DB에 값을 처리할 변수 선언 : Connection (conn) <== Include
 	String sql = null;
 	Statement stmt = null;
+	PreparedStatement pstmt = null;
 	ResultSet rs = null;		// id 컬럼의 최대값을 select
 	
 	// Try ~ catch로 오류처리
@@ -58,7 +59,7 @@
 	}else{				// 테이블에 값이 존재하는 경우
 		// 테이블에서 max(id)로 가져와서 getString이 안된다.
 		// 테이블의 컬럼이름 변경을 해도 안된다.(as id = X)
-		id = rs.getInt(1) + 1;	// getString : 컬럼명을 가져온다. , getInt : 컬럼의 index값을 가져온다. 첫번쨰가 1부터 시작
+		id = rs.getInt(1) + 1;	// getString : 컬럼을 가져온다. , getInt : 테이블의 값을 가져온다. 첫번쨰가 1부터 시작
 	}
 	//아래는 위의 if와 안의 구문이 반대 : 출력값은 같다.
 	/*
@@ -73,14 +74,30 @@
 	// 폼에서 넘겨받은 값을 DB에 insert하는 쿼리 (주의 : masterid : id컬럼에 들어오는 값으로 처리해야함)
 	sql = "insert into freeboard (id, name, password, email, ";
 	sql += "subject, content, inputdate, masterid, readcount, replynum, step) ";
-	sql = sql + "values (" + id + ", '" + na + "', '" + pw + "', '" + em + "', '" + sub + "', '" + cont + "', ";
-	sql = sql + "'" + ymd + "', " + id + "," + "0 , 0 , 0)";
+	sql = sql + "values (?,?,?,?,?,?,?,?, " ;
+	sql = sql + "0, 0, 0";
+	
+	//PreparedStatement 객체 생성
+		//객체 생성시 sql 구문을 넣는다.
+	pstmt = conn.prepareStatement(sql);
+	
+	//?에 변수값을 할당
+	pstmt.setInt(1, id);		//int
+	pstmt.setString(2, na);
+	pstmt.setString(3, pw);
+	pstmt.setString(4, em);
+	pstmt.setString(5, sub);
+	pstmt.setString(6, cont);
+	pstmt.setString(7, ymd);
+	pstmt.setInt(8, id);		//int
+	
+	pstmt.executeUpdate();
 	
 	// DB에서 insert를 직접하면 commit을 시켜야한다.
 	//out.println(sql);
 	//if(true) return;		// 프로그램을 중지 시킴. 디버깅할때 사용함.
 	
-	stmt.executeUpdate(sql);	//DB 저장완료, commit을 자동완료시킴
+	//stmt.executeUpdate(sql);	//DB 저장완료, commit을 자동완료시킴
 	// id와 masterid의 값이 같아야 답변이 가능하다.
 	
 	
@@ -88,7 +105,7 @@
 	}catch (Exception e){
 		out.println("예상치못한 오류가 발생했습니다. <p/>");
 		out.println("고객센터 : 02-1111-1111 <p/>");
-		// e.printStackTrace();	<= 개발자가 디버깅을 위해 보는 것
+		//e.printStackTrace();	<= 개발자가 디버깅을 위해 보는 것
 	}finally{	// finally로 객체 제거
 		if(conn != null) {conn.close();}
 		if(stmt != null) {stmt.close();}
@@ -105,7 +122,7 @@
 <% //response.sendRedirect("freeboard_list.jsp"); %>
 <!-- 방법2 -->
 
-<jsp:forward page = "freeboard_list.jsp" />
+<jsp:forward page = "freeboard_list03.jsp" />
 
 
 <!DOCTYPE html>

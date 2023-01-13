@@ -33,8 +33,8 @@
     <link href="filegb.css" rel="stylesheet" type="text/css">   
     </HEAD>                                       
     <BODY>                                        
-    <P>                                           
-    <FORM name="msgwrite" method="post" action="freeboard_save.jsp">    
+    <P/>                                        
+    <FORM name="msgwrite" method="post" action="freeboard_save03.jsp">    
 	    <CENTER>                                      
 		    <table width="600"cellspacing="0" cellpadding="2">           
 			     <tr>                                        

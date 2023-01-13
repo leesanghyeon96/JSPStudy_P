@@ -78,8 +78,8 @@
 			   </tr>
 			   <tr bgcolor='#F4F4F4'>
 			   <td width='13%'></td>
-			   <td width='51%'>작성일 : <%= rs.getString("inputdate") %>></td>
-			   <td width='25%'>조회 : <%= rs.getString("readcount") %>></td>
+			   <td width='51%'>작성일 : <%= rs.getString("inputdate") %></td>
+			   <td width='25%'>조회 : <%= rs.getString("readcount") %></td>
 			   <td width='11%'></td>
 			   </tr>
 			   </table>
@@ -112,7 +112,7 @@
 		
    <table width="600" border="0" cellpadding="0" cellspacing="5">
 	<tr> 
-		<td align="right" width="450"><A href="freeboard_list.jsp"><img src="image/list.jpg" border=0></a></td>
+		<td align="right" width="450"><A href="freeboard_list03.jsp"><img src="image/list.jpg" border=0></a></td>
 		<td width="70" align="right"><A href="freeboard_rwrite.jps"><img src="image/reply.jpg" border=0></A></td>
 		<td width="70" align="right"><A href="freeboard_upd.jsp"><img src="image/edit.jpg" border=0></A></td>
 		<td width="70" align="right"><A href="freeboard_del.jsp"><img src="image/del.jpg"  border=0></A></td>
