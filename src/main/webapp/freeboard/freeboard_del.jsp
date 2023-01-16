@@ -30,6 +30,11 @@
    		<!-- HTML 페이지에 출력은 하지 않으나 변수의 값을 다른 페이지로 넘길때  
    			id 변수와 page 변수의 값을 처리
    		-->
+   		<!-- *아주 중요함 : input type="hidden"* : freeboard_deldb.jsp로 넘어갈때 
+   			<.%= request.getParameter("id") %.>의 값이 id값에 담기고
+   			<.%= request.getParameter("page") %.>의 값이 page에 담겨 이 2개를 넘겨줘야한다.
+   			이때 임시적으로 잠시 저장하는것이 input type="hidden"이다.
+   		 -->
    		<input type="hidden" name = "id" value = "<%= request.getParameter("id") %>"> 
    		<input type="hidden" name = "page" value = "<%= request.getParameter("page") %>">
    		
@@ -60,7 +65,7 @@
    					<table width = "100%" border = "0" cellpadding = "4" cellspacing = "4"> 
    						<tr> <td width ="84%"> &nbsp; </td>
    							<td width = "8%"> 
-   								<a href = "freeboard_list.jsp" > 
+   								<a href = "freeboard_list03.jsp?go=<%= request.getParameter("page") %>" > 
    									<img src = "image/list.jpg" width="48" height="19" border="0">
    								</a>
    							</td>

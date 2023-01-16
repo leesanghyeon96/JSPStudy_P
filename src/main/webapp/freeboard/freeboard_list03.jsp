@@ -207,7 +207,7 @@
   <tr>		<!-- 테이블의 값을 가져와서 여기에서 루프를 돌려 찍어준다. -->	
   	<td><%= keyid.elementAt(j) %></td>	<!-- vector의 값을 가져온다. -->	<!-- 번호 -->
   	<!-- freeboard_read.jsp를 호출하면서 id변수에 <> 를 넣어 id값의 상세페이지로 이동 -->	
-  	<td><a href="freeboard_read.jsp?id=<%= keyid.elementAt(j) %>"> <%= subject.elementAt(j) %>  </a> </td> <!-- 제목 -->
+  	<td><a href="freeboard_read.jsp?id=<%= keyid.elementAt(j) %>&page=<%= where %>"> <%= subject.elementAt(j) %>  </a> </td> <!-- 제목 -->
   	<td><%= name.elementAt(j) %></td>	<!-- 등록자 -->
   	<td><%= inputdate.elementAt(j) %></td> <!-- 날짜 -->
   	<td><%= readcount.elementAt(j) %></td> <!-- 조회 -->

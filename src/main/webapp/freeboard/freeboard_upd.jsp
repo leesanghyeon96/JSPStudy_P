@@ -1,7 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page language="java" import="java.sql.*" %> 
+<%@ page import="java.sql.*" %> 
+<%@ include file="conn_oracle.jsp" %>
+
+<%
+	// DB 접근시  기본 변수 선언
+	String sql = null;
+	Statement stmt = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	int id = Integer.parseInt(request.getParameter("id"));
+	String p = request.getParameter("page");
+	
+	/*
+	out.println(id + "<p/>");
+	out.println(p);
+	if(true) return;
+	*/
+	
+	try{
+		sql = "select * from freeboard where id = ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, id);
+		rs = pstmt.executeQuery();
+		
+		//rs의 값이 잘 가져왔을때
+		if(!(rs.next())){
+			//값이 없을때
+			out.println("해당 내용이 DataBase에 존재하지 않습니다.");
+		}else{
+			//값이 있을때
+			
+%>
+
 <HTML>
 <HEAD>
 <SCRIPT language="javascript">
@@ -39,6 +72,9 @@ function check() {
 <P>
 
 <FORM name="msgwrite" method=POST action="freeboard_upddb.jsp">
+	<input type="hidden" name="id" value="<%= id %>">
+	<input type="hidden" name="page" value="<%= p %>">
+
  <table width="600" cellspacing="0" cellpadding="2" align = "center">
   <tr> 
    <td colspan="2" bgcolor="#1F4F8F" height="1"></td>
@@ -52,25 +88,25 @@ function check() {
   <tr> 
    <td width="124" height="30" align="center" bgcolor="#f4f4f4">이 름</td>
    <td width="494"  style="padding:0 0 0 10"> 
-    <input type=text name=name value="" class="input_style1">
+    <input type=text name=name value="<%= rs.getString("name") %>" class="input_style1">
    </td>
   </tr>
   <tr> 
    <td width="124" align="center"  bgcolor="#f4f4f4">E-mail</td>
    <td width="494" style="padding:0 0 0 10" height="25"> 
-    <input type=text name=email value="" class="input_style1">
+    <input type=text name=email value="<%= rs.getString("email") %>" class="input_style1">
    </td>
   </tr>
   <tr> 
    <td width="124" align="center"  bgcolor="#f4f4f4">제 목</td>
    <td width="494" style="padding:0 0 0 10" height="25"> 
-    <input type=text name=subject size="60" value="" class="input_style2">
+    <input type=text name=subject size="60" value="<%= rs.getString("subject") %>" class="input_style2">
    </td>
   </tr>
   <tr> 
    <td width="124" height="162" align="center" valign="top" bgcolor="#f4f4f4" style="padding-top:7;">내 용</td>
    <td width="494" valign="top"  style="padding:5 0 5 10"> 
-    <textarea name=content cols="65" rows="10" class="textarea_style1"> </textarea>
+    <textarea name=content cols="65" rows="10" class="textarea_style1"> <%= rs.getString("content") %> </textarea>
    </td>
   </tr>
   <tr> 
@@ -95,7 +131,7 @@ function check() {
       <td width="64%">&nbsp;</td>
       <td width="12%"><a href="#" onClick="check();"><img src="image/ok.gif" border="0"></a></td>
       <td width="12%"><a href="#" onClick="history.go(-1)"><img src="image/cancle.gif"  border="0"></td>
-      <td width="12%"><A href="freeboard_list.jsp"> <img src="image/list.jpg" border=0></a></td>
+      <td width="12%"><A href="freeboard_list03.jsp?go=<%= request.getParameter("page") %>"> <img src="image/list.jpg" border=0></a></td>
      </tr>
     </table>
    </td>
@@ -103,6 +139,18 @@ function check() {
  </table>
 </FORM>
 
+<% 
+		} //if문 종료
+		
+	}catch (Exception e){
+		e.printStackTrace();	//디버깅 목적, 잘 저리되면 주석처리
+	}finally{
+		if(conn != null) conn.close();
+		if(stmt != null) stmt.close();
+		if(pstmt != null) pstmt.close();
+		if(rs != null) rs.close();
+	}
+%>
 
 </BODY>
 </HTML>
