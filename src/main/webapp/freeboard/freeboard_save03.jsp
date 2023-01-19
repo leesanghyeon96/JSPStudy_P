@@ -22,6 +22,7 @@
 	String cont = request.getParameter("content");
 	String pw = request.getParameter("password");
 	
+	
 	int id = 1;		// id에 처음 값을 할당할때 기본값으로 1을 할당.
 					// 다음부터는 테이블의 id컬럼에서 Max값을 가져와서 +1해서 처리
 	
@@ -73,13 +74,14 @@
 	//Statement 객체는 변수값 처리가 복잡하다. PreparedStatement 를 사용한다.
 	// 폼에서 넘겨받은 값을 DB에 insert하는 쿼리 (주의 : masterid : id컬럼에 들어오는 값으로 처리해야함)
 	sql = "insert into freeboard (id, name, password, email, ";
-	sql += "subject, content, inputdate, masterid, readcount, replynum, step) ";
+	sql += "subject, content, inputdate, masterid, readcount, replaynum, step) ";
 	sql = sql + "values (?,?,?,?,?,?,?,?, " ;
 	sql = sql + "0, 0, 0";
 	
 	//PreparedStatement 객체 생성
-		//객체 생성시 sql 구문을 넣는다.
-	pstmt = conn.prepareStatement(sql);
+		//Statement는 객체 생성시 sql구문이 들어가지 않지만
+		//PreparedStatement 객체를 생성시 sql구문이 들어간다.
+	pstmt = conn.prepareStatement(sql);	
 	
 	//?에 변수값을 할당
 	pstmt.setInt(1, id);		//int

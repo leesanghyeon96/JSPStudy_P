@@ -28,7 +28,8 @@
 		// String => int : Integer.parseInt(request.getParameter("id"))
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		
+		// get방식으로 넘어오는 id변수를 받아 Integer로 변환해 id로 재할당.
+		// 그 id를 select쿼리를 이용해 sql에 할당.
 		/* Statement 객체를 사용해서 처리
 		//	select * from freeboard where id = 14; 를 아래 형식으로
 		sql = "select * from freeboard where id = " + id;
@@ -49,8 +50,7 @@
 		
 		
 
-		// get방식으로 넘어오는 id변수를 받아 Integer로 변환해 id로 재할당.
-		// 그 id를 select쿼리를 이용해 sql에 할당.
+
 		// if문을 통해 각각의 레코드의 값을 찍어준다.
 		if(rs.next()){
 	
@@ -113,7 +113,7 @@
    <table width="600" border="0" cellpadding="0" cellspacing="5">
 	<tr> 
 		<td align="right" width="450"><A href="freeboard_list03.jsp?go=<%= request.getParameter("page")%>"><img src="image/list.jpg" border=0></a></td>
-		<td width="70" align="right"><A href="freeboard_rwrite.jps?id=<%= request.getParameter("id")%>&page=<%request.getParameter("page");%>"><img src="image/reply.jpg" border=0></A></td>
+		<td width="70" align="right"><A href="freeboard_rwrite.jsp?id=<%= request.getParameter("id") %>&page=<%= request.getParameter("page") %>"><img src="image/reply.jpg" border=0></A></td>
 		<td width="70" align="right"><A href="freeboard_upd.jsp?id=<%= id %>&page=<%= request.getParameter("page")%>"><img src="image/edit.jpg" border=0></A></td>
 		<td width="70" align="right"><A href="freeboard_del.jsp?id=<%= id %>&page=<%= request.getParameter("page")%>"><img src="image/del.jpg"  border=0></A></td>
 	</tr>

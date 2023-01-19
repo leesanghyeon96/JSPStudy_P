@@ -73,7 +73,7 @@
 	//Statement 객체는 변수값 처리가 복잡하다. PreparedStatement 를 사용한다.
 	// 폼에서 넘겨받은 값을 DB에 insert하는 쿼리 (주의 : masterid : id컬럼에 들어오는 값으로 처리해야함)
 	sql = "insert into freeboard (id, name, password, email, ";
-	sql += "subject, content, inputdate, masterid, readcount, replynum, step) ";
+	sql += "subject, content, inputdate, masterid, readcount, replaynum, step) ";
 	sql = sql + "values (?,?,?,?,?,?,?,?, " ;
 	sql = sql + "0, 0, 0";
 	

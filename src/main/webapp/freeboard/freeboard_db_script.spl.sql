@@ -12,7 +12,7 @@ create table freeboard(
     -- 답변글을 처리하는 컬럼
     masterid number default 0,		-- masterid, replay
     readcount number default 0,				-- 글 조회수
-    replynum number default 0,
+    replaynum number default 0,
     step number default 0
 );
 
@@ -33,7 +33,7 @@ create table freeboard(
     -- 답변글을 처리하는 컬럼
     masterid int default 0,
     readcount int default 0,
-    replynum int default 0,
+    replaynum int default 0,
     step int default 0
 );
 
@@ -54,7 +54,7 @@ create table freeboard(
     -- 답변글을 처리하는 컬럼
     masterid int default 0,
     readcount int default 0,
-    replynum int default 0,
+    replaynum int default 0,
     step int default 0
 );
 

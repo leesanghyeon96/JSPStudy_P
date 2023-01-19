@@ -134,9 +134,9 @@
 		Statement stmt = null;
 		ResultSet rs = null;
 		
-		//리스트페이지에서 답변글 처리의 출력을 하기위한 쿼리
+		//리스트페이지에서 답변글 처리의 출력을 하기위한 쿼리 **(masterid desc)
 		sql = "select * from freeboard order by ";
-		sql += "masterid desc, replynum, step, id";
+		sql += "masterid desc, replaynum, step, id";
 		
 		
 		stmt = conn.createStatement();
@@ -259,36 +259,25 @@
 	out.println("전체 글수 : " + totalrows);
 	
 %>	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-
-
-
-
+<!-- search로 넘어가는 form블락 : 변수 2개(stype과 sval)넘어감 -->
 <FORM method="post" name="msgsearch" action="freeboard_search.jsp">
 <TABLE border=0 width=600 cellpadding=0 cellspacing=0>
  <TR>
   <TD align=right width="241"> 
-   <SELECT name=stype >
-    <OPTION value=1 >이름
-    <OPTION value=2 >제목
-    <OPTION value=3 >내용
-    <OPTION value=4 >이름+제목
-    <OPTION value=5 >이름+내용
-    <OPTION value=6 >제목+내용
-    <OPTION value=7 >이름+제목+내용
+   <SELECT name=stype >		<!-- stype 변수에 value의 값이 넘어감 (String형식으로 넘어감)
+   								-> freeboard_search.jsp에서 request.getParameter로 불러옴 -->
+    <OPTION value=1 >이름</OPTION>
+    <OPTION value=2 >제목</OPTION>
+    <OPTION value=3 >내용</OPTION>
+    <OPTION value=4 >이름+제목</OPTION>
+    <OPTION value=5 >이름+내용</OPTION>
+    <OPTION value=6 >제목+내용</OPTION>
+    <OPTION value=7 >이름+제목+내용</OPTION>
    </SELECT>
   </TD>
   <TD width="127" align="center">
-   <INPUT type=text size="17" name="sval" >
+   <INPUT type=text size="17" name="sval" >	<!-- sval : search value -->
   </TD>
   <TD width="115">&nbsp;<a href="#" onClick="check();"><img src="image/serach.gif" border="0" align='absmiddle'></A></TD>
   <TD align=right valign=bottom width="117"><A href="freeboard_write.jsp"><img src="image/write.gif" border="0"></TD>
