@@ -99,7 +99,6 @@
 		startpage = (wheregroup -1) * maxpages +1;
 		endpage = startpage + maxpages -1;
 	
-	
 	//gogroup 변수를 넘겨받아서 startpage, endpage, where의 정보를 알아낼 수 있다. [다음] , [1][2][3][4][5] <= gogroup1
 		//코드 블락
 	}else if (request.getParameter("gogroup") != null){  //freeboard_list03.jsp?gogroup= 
@@ -111,8 +110,8 @@
 		
 		
 		
-	int nextgroup = wheregroup + 1;
-	int priorgroup = wheregroup - 1;
+	int nextgroup = wheregroup + 1;		//nextgroup : [다음]
+	int priorgroup = wheregroup - 1;	//priorgroup : [마지막]
 	
 	//int nextpage = where + 1;	// where : 현재 내가 위치한 페이지
 	//int priorpage = where -1;	// priorpage : 이전페이지로 이동
@@ -259,6 +258,7 @@
 	out.println("전체 글수 : " + totalrows);
 	
 %>	
+
 
 <!-- search로 넘어가는 form블락 : 변수 2개(stype과 sval)넘어감 -->
 <FORM method="post" name="msgsearch" action="freeboard_search.jsp">

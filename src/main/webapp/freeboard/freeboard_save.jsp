@@ -59,6 +59,7 @@
 		// 테이블에서 max(id)로 가져와서 getString이 안된다.
 		// 테이블의 컬럼이름 변경을 해도 안된다.(as id = X)
 		id = rs.getInt(1) + 1;	// getString : 컬럼명을 가져온다. , getInt : 컬럼의 index값을 가져온다. 첫번쨰가 1부터 시작
+		// getInt(1) = getInt("max(id)"")
 	}
 	//아래는 위의 if와 안의 구문이 반대 : 출력값은 같다.
 	/*
